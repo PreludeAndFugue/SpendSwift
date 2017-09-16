@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G1217" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName=".Category" syncable="YES">
+        <attribute name="name" attributeType="String" defaultValueString="New Category" syncable="YES"/>
+        <relationship name="categoryItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="itemCategory" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="Item" representedClassName=".Item" syncable="YES">
+        <attribute name="cost" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Food" syncable="YES"/>
+        <attribute name="purchaseDate" attributeType="Date" defaultDateTimeInterval="509124180" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="itemCategory" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="categoryItems" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="-299" positionY="33" width="128" height="73"/>
+        <element name="Item" positionX="-54" positionY="3" width="128" height="103"/>
+    </elements>
+</model>
