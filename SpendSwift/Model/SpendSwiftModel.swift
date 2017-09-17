@@ -29,9 +29,14 @@ final class SpendSwiftModel {
 
     
     func items(for date: Date) -> [Item] {
+        return items(from: date, to: date)
+    }
+
+
+    func items(from fromDate: Date, to toDate: Date) -> [Item] {
         let calendar = Calendar.current
-        let start = calendar.startOfDay(for: date) as NSDate
-        let end = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)! as NSDate
+        let start = calendar.startOfDay(for: fromDate) as NSDate
+        let end = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: toDate)! as NSDate
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         let predicate = NSPredicate(format: "purchaseDate >= %@ AND purchaseDate <= %@", start, end)
         fetchRequest.predicate = predicate
