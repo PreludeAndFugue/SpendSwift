@@ -16,7 +16,6 @@ class ItemsViewController: NSViewController {
     @IBOutlet weak var itemCost: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var addButton: NSButton!
-
     @IBOutlet weak var totalCostLabel: NSTextField!
 
     enum CellType: String {
@@ -30,8 +29,16 @@ class ItemsViewController: NSViewController {
     var currentDate = Date()
     var categories: [Category]!
     var items: [Item]!
-    var numberFormatter: NumberFormatter!
+    lazy var numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.numberStyle = .currency
+        return numberFormatter
+    }()
 
+
+    // MARK: - Actions
 
     @IBAction func addItem(_ sender: NSButton) {
         let category = categories[itemCategoryPicker.indexOfSelectedItem]
@@ -40,14 +47,26 @@ class ItemsViewController: NSViewController {
         itemName.selectText(nil)
     }
 
+
     @IBAction func changeDate(_ sender: NSDatePicker) {
-        print("change date")
+        currentDate = sender.dateValue
         refresh()
     }
 
 
+    @objc func deleteItem() {
+        if items.count == 0 {
+            return
+        }
+        let item = items[tableView.clickedRow]
+        model.delete(item: item)
+        refresh()
+    }
+
+
+    // MARK: - View Lifecycle
+
     override func viewDidLoad() {
-        print("items view did load")
         super.viewDidLoad()
         let appDelegate = NSApp.delegate as! AppDelegate
         model = appDelegate.model
@@ -57,21 +76,17 @@ class ItemsViewController: NSViewController {
         tableView.menu = createMenu()
         itemName.delegate = self
         itemCost.delegate = self
-        numberFormatter = NumberFormatter()
-        numberFormatter.minimumFractionDigits = 2
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.numberStyle = .currency
+        datePicker.dateValue = currentDate
     }
 
 
     override func viewWillAppear() {
-        print("items view will appear")
         refreshCategories()
         refresh()
     }
 
 
-    // MARK: - private
+    // MARK: - Private
 
     private func refresh() {
         items = model.items(for: currentDate)
@@ -115,23 +130,12 @@ class ItemsViewController: NSViewController {
         menu.addItem(item)
         return menu
     }
-
-
-    @objc func deleteItem() {
-        if items.count == 0 {
-            return
-        }
-        let item = items[tableView.clickedRow]
-        model.delete(item: item)
-        refresh()
-    }
 }
 
 
 // MARK: - NSTableViewDataSource
 
 extension ItemsViewController: NSTableViewDataSource {
-
     func numberOfRows(in tableView: NSTableView) -> Int {
         return items.count
     }
@@ -141,9 +145,12 @@ extension ItemsViewController: NSTableViewDataSource {
 // MARK: - NSTableViewDelegate
 
 extension ItemsViewController: NSTableViewDelegate {
-
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let identifier = tableColumn?.identifier, let cellType = CellType(rawValue: identifier.rawValue), let cell = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView else {
+        guard
+            let identifier = tableColumn?.identifier,
+            let cellType = CellType(rawValue: identifier.rawValue),
+            let cell = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView
+        else {
             return nil
         }
         let item = items[row]
@@ -164,7 +171,6 @@ extension ItemsViewController: NSTableViewDelegate {
 // MARK: - NSTextFieldDelegate
 
 extension ItemsViewController: NSTextFieldDelegate {
-
     override func controlTextDidChange(_ obj: Notification) {
         refreshAddButton()
     }

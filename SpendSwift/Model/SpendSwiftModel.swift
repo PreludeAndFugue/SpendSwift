@@ -82,7 +82,10 @@ final class SpendSwiftModel {
 
 
     func newCategory(name: String) {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Category", in: managedObjectContext), let category = NSManagedObject(entity: entity, insertInto: managedObjectContext) as? Category else {
+        guard
+            let entity = NSEntityDescription.entity(forEntityName: "Category", in: managedObjectContext),
+            let category = NSManagedObject(entity: entity, insertInto: managedObjectContext) as? Category
+        else {
             return
         }
         category.name = name
@@ -108,7 +111,10 @@ final class SpendSwiftModel {
     func newCategories(with names: [String]) {
         var categories: [Category] = []
         for name in names {
-            guard let entity = NSEntityDescription.entity(forEntityName: "Category", in: managedObjectContext), let category = NSManagedObject(entity: entity, insertInto: managedObjectContext) as? Category else {
+            guard
+                let entity = NSEntityDescription.entity(forEntityName: "Category", in: managedObjectContext),
+                let category = NSManagedObject(entity: entity, insertInto: managedObjectContext) as? Category
+            else {
                 return
             }
             category.name = name
@@ -148,26 +154,32 @@ final class SpendSwiftModel {
             let nserror = error as NSError
             // Customize this code block to include application-specific recovery steps.
             let result = app.presentError(nserror)
-            if (result) {
+            if result {
                 return .terminateCancel
             }
 
-            let question = NSLocalizedString("Could not save changes while quitting. Quit anyway?", comment: "Quit without saves error question message")
-            let info = NSLocalizedString("Quitting now will lose any changes you have made since the last successful save", comment: "Quit without saves error question info");
-            let quitButton = NSLocalizedString("Quit anyway", comment: "Quit anyway button title")
-            let cancelButton = NSLocalizedString("Cancel", comment: "Cancel button title")
-            let alert = NSAlert()
-            alert.messageText = question
-            alert.informativeText = info
-            alert.addButton(withTitle: quitButton)
-            alert.addButton(withTitle: cancelButton)
-
-            let answer = alert.runModal()
-            if answer == NSApplication.ModalResponse.alertSecondButtonReturn {
+            if askToQuit() == .alertSecondButtonReturn {
                 return .terminateCancel
             }
         }
         // If we got here, it is time to quit.
         return .terminateNow
+    }
+
+
+    // MARK: - Private
+
+    private func askToQuit() -> NSApplication.ModalResponse {
+        let question = NSLocalizedString("Could not save changes while quitting. Quit anyway?", comment: "Quit without saves error question message")
+        let info = NSLocalizedString("Quitting now will lose any changes you have made since the last successful save", comment: "Quit without saves error question info");
+        let quitButton = NSLocalizedString("Quit anyway", comment: "Quit anyway button title")
+        let cancelButton = NSLocalizedString("Cancel", comment: "Cancel button title")
+        let alert = NSAlert()
+        alert.messageText = question
+        alert.informativeText = info
+        alert.addButton(withTitle: quitButton)
+        alert.addButton(withTitle: cancelButton)
+
+        return alert.runModal()
     }
 }

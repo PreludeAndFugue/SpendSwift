@@ -14,19 +14,22 @@ class CategoriesViewController: NSViewController {
     @IBOutlet weak var newCategoryName: NSTextField!
     @IBOutlet weak var addButton: NSButton!
 
+    fileprivate let cellIdentifier = "CategoryCell"
+    fileprivate var model: SpendSwiftModel!
+    fileprivate var categories: [Category]!
+
+
+    // MARK: - Actions
+
     @IBAction func addNewCategory(_ sender: NSButton) {
         let newName = newCategoryName.stringValue.trimmingCharacters(in: .whitespaces)
         model.newCategory(name: newName)
         refresh()
     }
 
-    fileprivate let cellIdentifier = "CategoryCell"
-    fileprivate var model: SpendSwiftModel!
-    fileprivate var categories: [Category]!
-
+    // MARK: - View lifecycle
 
     override func viewDidLoad() {
-        print("categories view did load")
         super.viewDidLoad()
         let appDelegate = NSApp.delegate as! AppDelegate
         model = appDelegate.model
@@ -36,21 +39,6 @@ class CategoriesViewController: NSViewController {
         tableView.delegate = self
         tableView.menu = createMenu()
         newCategoryName.delegate = self
-    }
-
-    
-    // MARK: - Private
-
-    private func refresh() {
-        categories = model.categories()
-        tableView.reloadData()
-    }
-
-    private func createMenu() -> NSMenu {
-        let menu = NSMenu(title: "Delete")
-        let item = NSMenuItem(title: "Delete", action: #selector(deleteCategory), keyEquivalent: "")
-        menu.addItem(item)
-        return menu
     }
 
 
@@ -69,6 +57,22 @@ class CategoriesViewController: NSViewController {
             refresh()
         }
     }
+
+    
+    // MARK: - Private
+
+    private func refresh() {
+        categories = model.categories()
+        tableView.reloadData()
+    }
+
+
+    private func createMenu() -> NSMenu {
+        let menu = NSMenu(title: "Delete")
+        let item = NSMenuItem(title: "Delete", action: #selector(deleteCategory), keyEquivalent: "")
+        menu.addItem(item)
+        return menu
+    }
 }
 
 
@@ -79,7 +83,6 @@ extension CategoriesViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return categories.count
     }
-
 }
 
 
