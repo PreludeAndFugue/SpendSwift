@@ -37,6 +37,10 @@ class SummaryViewController: NSViewController {
         let appDelegate = NSApp.delegate as! AppDelegate
         model = appDelegate.model
         datePicker.dateValue = Date()
+    }
+
+
+    override func viewWillAppear() {
         refresh()
     }
 
@@ -59,7 +63,7 @@ class SummaryViewController: NSViewController {
 
 
     private func costPerCategory(items: [Item]) -> [Category: Int32] {
-        var costs: [Category: Int32] = [:]
+        var costs: [Category: Int32] = emptyCategoryCosts()
         for item in items {
             guard let category = item.itemCategory else { continue }
             if let cost = costs[category] {
@@ -79,5 +83,14 @@ class SummaryViewController: NSViewController {
             costStrings.append("\(category.name!): \(costString)")
         }
         return costStrings.joined(separator: "\n")
+    }
+
+
+    private func emptyCategoryCosts() -> [Category: Int32] {
+        var costs: [Category: Int32] = [:]
+        for category in model.categories() {
+            costs[category] = 0
+        }
+        return costs
     }
 }
