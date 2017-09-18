@@ -686,10 +686,11 @@
         <!--Tab View Controller-->
         <scene sceneID="9cc-yJ-fFk">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" id="K8U-kn-zxk" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="1" id="K8U-kn-zxk" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Items" identifier="" id="edd-aV-kYQ"/>
                         <tabViewItem label="Categories" identifier="" id="Liu-g0-8ho"/>
+                        <tabViewItem id="W9I-KH-kkq"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="1E8-Vg-e4S">
                         <rect key="frame" x="0.0" y="0.0" width="492" height="302"/>
@@ -704,6 +705,7 @@
                         <outlet property="tabView" destination="1E8-Vg-e4S" id="1fr-P7-GCx"/>
                         <segue destination="qcp-Qp-v04" kind="relationship" relationship="tabItems" id="GBR-nZ-a42"/>
                         <segue destination="syB-0S-hDK" kind="relationship" relationship="tabItems" id="fQs-vS-x52"/>
+                        <segue destination="gma-d8-VnJ" kind="relationship" relationship="tabItems" id="zep-hR-DvS"/>
                     </connections>
                 </tabViewController>
                 <customObject id="srm-g1-LE5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -964,7 +966,7 @@
                 <managedObjectContext id="PER-Bu-LYw"/>
                 <userDefaultsController representsSharedInstance="YES" id="tRq-VF-hd4"/>
             </objects>
-            <point key="canvasLocation" x="-129" y="1177"/>
+            <point key="canvasLocation" x="-392" y="1212"/>
         </scene>
         <!--Categories View Controller-->
         <scene sceneID="MYQ-l1-1GT">
@@ -1087,7 +1089,56 @@
                 <customObject id="ya2-8J-j2n" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <managedObjectContext id="aK6-xB-0Fm"/>
             </objects>
-            <point key="canvasLocation" x="436" y="1177"/>
+            <point key="canvasLocation" x="125" y="1212"/>
+        </scene>
+        <!--Summary-->
+        <scene sceneID="bk2-76-tWr">
+            <objects>
+                <viewController title="Summary" id="gma-d8-VnJ" customClass="SummaryViewController" customModule="SpendSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="YoD-7a-nO6">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="otq-sY-dFo">
+                                <rect key="frame" x="8" y="269" width="79" height="27"/>
+                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="ljy-Ac-ZcR">
+                                    <font key="font" metaFont="system"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="-185702400">
+                                        <!--1995-02-12 16:00:00 +0000-->
+                                    </date>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <datePickerElements key="datePickerElements" year="YES" month="YES"/>
+                                </datePickerCell>
+                                <connections>
+                                    <action selector="changeDate:" target="gma-d8-VnJ" id="Nhq-LM-BbO"/>
+                                </connections>
+                            </datePicker>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="aTJ-Sh-zW5">
+                                <rect key="frame" x="6" y="244" width="438" height="17"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" id="X5f-T8-dXX">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="aTJ-Sh-zW5" firstAttribute="top" secondItem="otq-sY-dFo" secondAttribute="bottom" constant="8" id="8rR-Rf-zfn"/>
+                            <constraint firstItem="aTJ-Sh-zW5" firstAttribute="leading" secondItem="YoD-7a-nO6" secondAttribute="leading" constant="8" id="Y6Y-aB-LNc"/>
+                            <constraint firstItem="otq-sY-dFo" firstAttribute="top" secondItem="YoD-7a-nO6" secondAttribute="top" constant="8" id="jcH-xc-hvP"/>
+                            <constraint firstAttribute="trailing" secondItem="aTJ-Sh-zW5" secondAttribute="trailing" constant="8" id="yuK-NM-6qM"/>
+                            <constraint firstItem="otq-sY-dFo" firstAttribute="leading" secondItem="YoD-7a-nO6" secondAttribute="leading" constant="8" id="z7D-6Z-VQn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="costDescriptions" destination="aTJ-Sh-zW5" id="dzt-cd-4BP"/>
+                        <outlet property="datePicker" destination="otq-sY-dFo" id="aoR-2h-6S9"/>
+                    </connections>
+                </viewController>
+                <customObject id="CQN-SD-yKn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="614" y="1212"/>
         </scene>
     </scenes>
 </document>

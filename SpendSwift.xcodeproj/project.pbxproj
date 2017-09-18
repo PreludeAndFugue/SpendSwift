@@ -18,6 +18,7 @@
 		4E65FF9A1E5E7F0A00140566 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E65FF961E5E7F0A00140566 /* Item+CoreDataProperties.swift */; };
 		4E8C3F951F6D6E7D003E05BE /* CoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8C3F941F6D6E7D003E05BE /* CoreModel.swift */; };
 		4EAAA0E11E6F8BA9000583FD /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAA0E01E6F8BA9000583FD /* MainWindowController.swift */; };
+		4EB96F901F6F4192009DE8DA /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB96F8F1F6F4192009DE8DA /* SummaryViewController.swift */; };
 		4ED1D4FD1E588AFF00CBFB1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1D4FC1E588AFF00CBFB1C /* AppDelegate.swift */; };
 		4ED1D4FF1E588AFF00CBFB1C /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1D4FE1E588AFF00CBFB1C /* ItemsViewController.swift */; };
 		4ED1D5041E588AFF00CBFB1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ED1D5031E588AFF00CBFB1C /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		4E65FF961E5E7F0A00140566 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E8C3F941F6D6E7D003E05BE /* CoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreModel.swift; sourceTree = "<group>"; };
 		4EAAA0E01E6F8BA9000583FD /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		4EB96F8F1F6F4192009DE8DA /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		4ED1D4F91E588AFF00CBFB1C /* SpendSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpendSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED1D4FC1E588AFF00CBFB1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4ED1D4FE1E588AFF00CBFB1C /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				4ED1D4FE1E588AFF00CBFB1C /* ItemsViewController.swift */,
 				4E1125081E5892BC00B475C0 /* CategoriesViewController.swift */,
 				4EAAA0E01E6F8BA9000583FD /* MainWindowController.swift */,
+				4EB96F8F1F6F4192009DE8DA /* SummaryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ED1D4FF1E588AFF00CBFB1C /* ItemsViewController.swift in Sources */,
+				4EB96F901F6F4192009DE8DA /* SummaryViewController.swift in Sources */,
 				4E31942B1E5A908900EE9DC1 /* SpendSwiftModel.swift in Sources */,
 				4E65FF971E5E7F0A00140566 /* Category+CoreDataClass.swift in Sources */,
 				4E65FF991E5E7F0A00140566 /* Item+CoreDataClass.swift in Sources */,
@@ -325,7 +329,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -374,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -389,7 +393,7 @@
 				DEVELOPMENT_TEAM = T59AZ797LW;
 				INFOPLIST_FILE = SpendSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.preludeandfugue.SpendSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -405,7 +409,7 @@
 				DEVELOPMENT_TEAM = T59AZ797LW;
 				INFOPLIST_FILE = SpendSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.preludeandfugue.SpendSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
