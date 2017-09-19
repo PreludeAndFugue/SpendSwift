@@ -73,7 +73,7 @@ final class SpendSwiftModel {
 
     func countItems(with category: Category) -> Int {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "%K == %@", "itemCategory.name", category.name ?? "")
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", "itemCategory.name", category.name)
         return try! managedObjectContext.count(for: fetchRequest)
     }
 
@@ -81,7 +81,7 @@ final class SpendSwiftModel {
     func categories() -> [Category] {
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
         var categories =  try! managedObjectContext.fetch(fetchRequest)
-        categories.sort { $0.name!.lowercased() < $1.name!.lowercased() }
+        categories.sort { $0.name.lowercased() < $1.name.lowercased() }
         return categories
     }
 

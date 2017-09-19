@@ -92,7 +92,7 @@ extension CategoriesViewController: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NSTableCellView {
-            cell.textField?.stringValue = categories[row].name!
+            cell.textField?.stringValue = categories[row].name
             return cell
         }
         return nil
@@ -116,7 +116,7 @@ extension CategoriesViewController: NSTextFieldDelegate {
     private func categoryAlreadyExists() -> Bool {
         let newName = newCategoryName.stringValue.trimmingCharacters(in: .whitespaces).lowercased()
         for category in categories {
-            let currentName = category.name?.lowercased()
+            let currentName = category.name.lowercased()
             if newName == currentName {
                 return true
             }

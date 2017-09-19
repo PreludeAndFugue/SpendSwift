@@ -104,7 +104,7 @@ class ItemsViewController: NSViewController {
 
     private func setupCategoryPicker(categories: [Category]) {
         itemCategoryPicker.removeAllItems()
-        itemCategoryPicker.addItems(withTitles: categories.map { $0.name! })
+        itemCategoryPicker.addItems(withTitles: categories.map { $0.name })
         if itemCategoryPicker.indexOfItem(withTitle: defaultCategory) != -1    {
             itemCategoryPicker.selectItem(withTitle: "Food")
         } else {
@@ -156,9 +156,9 @@ extension ItemsViewController: NSTableViewDelegate {
         let item = items[row]
         switch cellType {
         case .category:
-            cell.textField?.stringValue = item.itemCategory?.name ?? ""
+            cell.textField?.stringValue = item.itemCategory.name
         case .name:
-            cell.textField?.stringValue = item.name ?? ""
+            cell.textField?.stringValue = item.name
         case .cost:
             let value = Double(item.cost)/100.0
             cell.textField?.stringValue = numberFormatter.string(from: NSNumber(value: value)) ?? "£0.00"
