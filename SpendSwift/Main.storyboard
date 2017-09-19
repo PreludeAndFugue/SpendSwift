@@ -1115,9 +1115,9 @@
                                 </connections>
                             </datePicker>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="aTJ-Sh-zW5">
-                                <rect key="frame" x="6" y="244" width="438" height="17"/>
+                                <rect key="frame" x="6" y="238" width="438" height="23"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" id="X5f-T8-dXX">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" size="14" name="SourceCodePro-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
