@@ -11,13 +11,7 @@ import Cocoa
 class SummaryViewController: NSViewController {
 
     private var model: SpendSwiftModel!
-    private lazy var numberFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.minimumFractionDigits = 2
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.numberStyle = .currency
-        return numberFormatter
-    }()
+    private var summaryData: SummaryData!
 
     @IBOutlet weak var datePicker: NSDatePicker!
     @IBOutlet weak var costDescriptions: NSTextField!
@@ -36,6 +30,7 @@ class SummaryViewController: NSViewController {
         super.viewDidLoad()
         let appDelegate = NSApp.delegate as! AppDelegate
         model = appDelegate.model
+        summaryData = SummaryData(model: model)
         datePicker.dateValue = Date()
     }
 
@@ -49,9 +44,7 @@ class SummaryViewController: NSViewController {
 
     private func refresh() {
         let (firstDay, lastDay) = endpoints(date: datePicker.dateValue)
-        let items = model.items(from: firstDay, to: lastDay)
-        let costs = costPerCategory(items: items)
-        costDescriptions.stringValue = stringOf(costs: costs)
+        costDescriptions.stringValue = summaryData.summary(from: firstDay, to: lastDay)
     }
 
 
@@ -59,38 +52,5 @@ class SummaryViewController: NSViewController {
         let calendar = Calendar.current
         let interval = calendar.dateInterval(of: .month, for: date)!
         return (interval.start, interval.end)
-    }
-
-
-    private func costPerCategory(items: [Item]) -> [Category: Int32] {
-        var costs: [Category: Int32] = emptyCategoryCosts()
-        for item in items {
-            guard let category = item.itemCategory else { continue }
-            if let cost = costs[category] {
-                costs[category] = cost + item.cost
-            } else {
-                costs[category] = item.cost
-            }
-        }
-        return costs
-    }
-
-
-    private func stringOf(costs: [Category: Int32]) -> String {
-        var costStrings: [String] = []
-        for (category, cost) in costs {
-            let costString = numberFormatter.string(from: NSNumber(value: Double(cost)/100.0))!
-            costStrings.append("\(category.name!): \(costString)")
-        }
-        return costStrings.joined(separator: "\n")
-    }
-
-
-    private func emptyCategoryCosts() -> [Category: Int32] {
-        var costs: [Category: Int32] = [:]
-        for category in model.categories() {
-            costs[category] = 0
-        }
-        return costs
     }
 }
