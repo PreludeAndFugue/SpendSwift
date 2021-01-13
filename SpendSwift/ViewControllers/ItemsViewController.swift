@@ -114,7 +114,7 @@ class ItemsViewController: NSViewController {
 
 
     fileprivate func refreshAddButton() {
-        addButton.isEnabled = itemName.stringValue.characters.count > 0 && itemCost.integerValue > 0
+        addButton.isEnabled = itemName.stringValue.count > 0 && itemCost.integerValue > 0
     }
 
 
@@ -171,7 +171,7 @@ extension ItemsViewController: NSTableViewDelegate {
 // MARK: - NSTextFieldDelegate
 
 extension ItemsViewController: NSTextFieldDelegate {
-    override func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidChange(_ obj: Notification) {
         refreshAddButton()
     }
 }

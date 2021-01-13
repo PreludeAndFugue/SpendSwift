@@ -104,8 +104,8 @@ extension CategoriesViewController: NSTableViewDelegate {
 
 extension CategoriesViewController: NSTextFieldDelegate {
 
-    override func controlTextDidChange(_ obj: Notification) {
-        if newCategoryName.stringValue.characters.count == 0 || categoryAlreadyExists() {
+    func controlTextDidChange(_ obj: Notification) {
+        if newCategoryName.stringValue.count == 0 || categoryAlreadyExists() {
             addButton.isEnabled = false
         } else {
             addButton.isEnabled = true
